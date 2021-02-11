@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<h5 class="text-align-center">Posts on {{ view.kwargs.name }} ({{ page_obj.paginator.count }}) </h5>
+<section class="blog-list px-3 py-5 p-md-5">
+		    <div class="container">
+			{% for post in posts%}
+			 <div class="item mb-5">
+				    <div class="media">
+					    <img class="mr-2 img-fluid d-md" style="width: 12rem" src="{{ post.image }}" alt="image">
+					    <div class="media-body">
+						    <h3 class="title mb-1"><a href="{% url 'single' post.id %}">{{ post.title }}</a></h3>
+						    <div class="meta mb-1"><span class="date">by {{ post.author }}</span><span class="time">{{ post.date|date:"F d, Y" }}</span></div>
+						    <div class="intro">{{ post.content|safe }}</div>
+							<div class="meta mb-1"><a href="{% url 'category' post.genre.name %}"><span class="date">Category: {{ post.genre }}</span></a></div>
+						    <a class="more-link" href="{% url 'single' post.id %}">Read more &rarr;</a>
+					    </div><!--//media-body-->
+				    </div><!--//media-->
+			    </div><!--//item-->
+				{% endfor %}
+			    <nav class="blog-nav nav nav-justified my-5">
+				  <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+				  <a class="nav-link-next nav-item nav-link rounded" href="blog-list.html">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+				</nav>
+				
+		    </div>
+	    </section>
+
+
+{% endblock content %}
