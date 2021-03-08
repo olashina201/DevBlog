@@ -17,7 +17,7 @@ class PostListView(ListView):
     template_name = "blog/index.html"
     context_object_name = 'posts'
     ordering = ['-date']
-    paginate_by = 3
+    paginate_by = 5
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
@@ -35,6 +35,7 @@ def CategoryView(request, cats):
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About-Us'})
 
+
 def list(request):
     context = {
         'posts': Post.objects.all()
@@ -48,6 +49,8 @@ class BlogPostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date']
     paginate_by = 10
+
+
 
 class PostDetailView(DetailView):
     model = Post

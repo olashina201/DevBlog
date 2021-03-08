@@ -3,37 +3,43 @@
 
 {% block content %}
 
-{% for item in cat_menu %}
-	<a class="dropdown-item" href="{% url 'category' item %}">{{ item }}</a>
-{% endfor %}
-
+<div class="container text-center">
+	<label for="select">Select Category:</label>
+	<select id="select">
+		{% for item in cat_menu %}
+			<option><a class="dropdown-item" href="{% url 'category' item %}">{{ item }}</a></option>
+		{% endfor %}
+	</select>
+</div>
+<hr>
             
-
-<section class="cards-wrapper">
-
-{% for post in posts %}
-  <div class="card-grid-space">
-    <div class="num">01</div>
-    <a class="card" href="https://codetheweb.blog/2017/10/06/html-syntax/" style="--bg-img: url(https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&resize_w=1500&url=https://codetheweb.blog/assets/img/posts/html-syntax/cover.jpg)">
-      <div>
-        <h1>hbjgszn</h1>
-        <p>{{ post.content|safe }}</p>
-        <div class="date">{{ post.date }}</div>
-        <div class="tags">
-          <div class="tag">{{ post.genre }}</div>
-        </div>
-      </div>
-    </a>
-  </div>
-{% endfor %}
-
-
-  <!-- https://images.unsplash.com/photo-1520839090488-4a6c211e2f94?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=38951b8650067840307cba514b554ba5&auto=format&fit=crop&w=1350&q=80 -->
-</section>
-<nav class="blog-nav nav nav-justified my-5">
-				<a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-				<a class="nav-link-next nav-item nav-link rounded" href="blog-list.html">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+<section class="blog-list px-3 py-5 p-md-5">
+<div class="container text-center">
+	<h5>RECENT POSTS:</h5>
+</div>
+<hr>
+		    <div class="container">
+			{% for post in posts %}
+			 <div class="item mb-5">
+				    <div class="media">
+					    <img class="mr-2 img-fluid d-md" style="width: 12rem" src="{{ post.image }}" alt="image">
+					    <div class="media-body">
+						    <h3 class="title mb-1"><a href="{% url 'single' post.id %}">{{ post.title }}</a></h3>
+						    <div class="meta mb-1"><span class="date">by {{ post.author }}</span><span class="time">{{ post.date|date:"F d, Y" }}</span></div>
+						    <div class="intro d-none d-md-flex">{{ post.content|slice:':200'|safe }}</div>
+							<div class="meta mb-1"><a href="{% url 'category' post.genre.name %}"><span class="date">Category: {{ post.genre }}</span></a></div>
+						    <a class="more-link" href="{% url 'single' post.id %}">Read more &rarr;</a>
+					    </div><!--//media-body-->
+				    </div><!--//media-->
+			    </div><!--//item-->
+				{% endfor %}
+			    <nav class="blog-nav nav nav-justified my-5">
+				  <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+				  <a class="nav-link-next nav-item nav-link rounded" href="/post-list">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
 				</nav>
+				
+		    </div>
+	    </section>
 	    
 	   
 {% endblock content %}
