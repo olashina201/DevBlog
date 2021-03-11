@@ -1,46 +1,44 @@
-{% extends "blog\base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "blog\base.html" %} {% load static %} {% block content %}
 
 <div class="container text-center">
-	<label for="select">Select Category:</label>
-	<select id="select">
+    <label for="select">Select Category:</label>
+    <select id="select">
 		{% for item in cat_menu %}
 			<option><a class="dropdown-item" href="{% url 'category' item %}">{{ item }}</a></option>
 		{% endfor %}
 	</select>
 </div>
 <hr>
-            
-<section class="blog-list px-3 py-5 p-md-5">
-<div class="container text-center">
-	<h5>RECENT POSTS:</h5>
-</div>
-<hr>
-		    <div class="container">
-			{% for post in posts %}
-			 <div class="item mb-5">
-				    <div class="media">
-					    <img class="mr-2 img-fluid d-md" style="width: 12rem" src="{{ post.image }}" alt="image">
-					    <div class="media-body">
-						    <h3 class="title mb-1"><a href="{% url 'single' post.id %}">{{ post.title }}</a></h3>
-						    <div class="meta mb-1"><span class="date">by {{ post.author }}</span><span class="time">{{ post.date|date:"F d, Y" }}</span></div>
-						    <div class="intro d-none d-md-flex">{{ post.content|slice:':200'|safe }}</div>
-							<div class="meta mb-1"><a href="{% url 'category' post.genre.name %}"><span class="date">Category: {{ post.genre }}</span></a></div>
-						    <a class="more-link" href="{% url 'single' post.id %}">Read more &rarr;</a>
-					    </div><!--//media-body-->
-				    </div><!--//media-->
-			    </div><!--//item-->
-				{% endfor %}
-			    <nav class="blog-nav nav nav-justified my-5">
-				  <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-				  <a class="nav-link-next nav-item nav-link rounded" href="/post-list">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-				</nav>
-				
-		    </div>
-	    </section>
-	    
-	   
-{% endblock content %}
 
+<section class="blog-list px-3 py-5 p-md-5">
+    <div class="container text-center">
+        <h5>RECENT POSTS:</h5>
+    </div>
+    <div class="container">
+        {% for post in posts %}
+        <div class="item mb-5">
+            <div class="media">
+                <img class="mr-2 img-fluid d-md" style="width: 12rem" src="{{ post.image.url }}" alt="image">
+                <div class="media-body">
+                    <h3 class="title mb-1"><a href="{% url 'single' post.id %}">{{ post.title }}</a></h3>
+                    <div class="meta mb-1"><span class="date">by {{ post.author }}</span><span class="time">{{ post.date|date:"F d, Y" }}</span></div>
+                    <div class="intro d-none d-md-flex">{{ post.content|slice:':200'|safe }}</div>
+                    <div class="meta mb-1"><a href="{% url 'category' post.genre.name %}"><span class="date">Category: {{ post.genre }}</span></a></div>
+                    <a class="more-link" href="{% url 'single' post.id %}">Read more &rarr;</a>
+                </div>
+                <!--//media-body-->
+            </div>
+            <!--//media-->
+        </div>
+        <!--//item-->
+        {% endfor %}
+        <nav class="blog-nav nav nav-justified my-5">
+            <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+            <a class="nav-link-next nav-item nav-link rounded" href="/post-list">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+        </nav>
+
+    </div>
+</section>
+
+
+{% endblock content %}

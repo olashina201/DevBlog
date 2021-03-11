@@ -1,0 +1,1 @@
+web: guniorn devblog.wsgi

@@ -16,7 +16,7 @@
 			    
 			    <div class="blog-post-body">
 				    <figure class="blog-banner">
-				        <img class="img-fluid" src="{% static 'images/blog/blog-post-banner.jpg'%}" alt="image">
+				        <img class="img-fluid" src="{{ object.image }}" alt="image">
 				    </figure>
 				    <p>{{ object.content|safe }}</p>
 				</div><!--//blog-comments-section-->

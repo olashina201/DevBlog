@@ -8,7 +8,7 @@
 			{% for post in posts %}
 			 <div class="item mb-5">
 				    <div class="media">
-					    <img class="mr-2 img-fluid d-md" style="width: 12rem" src="{{ post.image }}" alt="image">
+					    <img class="mr-2 img-fluid d-md" style="width: 12rem" src="{{ post.image.url }}" alt="image">
 					    <div class="media-body">
 						    <h3 class="title mb-1"><a href="{% url 'single' post.id %}">{{ post.title }}</a></h3>
 						    <div class="meta mb-1"><span class="date">by {{ post.author }}</span><span class="time">{{ post.date|date:"F d, Y" }}</span></div>
